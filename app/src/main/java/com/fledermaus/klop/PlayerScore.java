@@ -2,18 +2,12 @@ package com.fledermaus.klop;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
-import android.text.TextWatcher;
 import android.text.style.StyleSpan;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
