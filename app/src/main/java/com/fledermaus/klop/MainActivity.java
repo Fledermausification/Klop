@@ -18,52 +18,38 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
     private int numPlayers = 0;
-    private LinearLayout[] playerScore;
+    private PlayerScore[] playerScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println("\n\nNEW SCORE!\n\n");
 
         Intent intent = getIntent();
         numPlayers = intent.getIntExtra(NewGameActivity.EXTRA_PLAYER_NUMBER, 0);
 
         if (numPlayers > 0) {
-            System.out.println("Going to create a new game for " + numPlayers + " Players!");
-
-            LinearLayout              layout       = (LinearLayout) findViewById(R.id.scores);
+            LinearLayout              nameLayout   = (LinearLayout) findViewById(R.id.names);
+            LinearLayout              scoreLayout  = (LinearLayout) findViewById(R.id.scores);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             TextView                  titleText    = new TextView(this);
 
-            layout.removeAllViews();
-
             titleText.setLayoutParams(layoutParams);
             titleText.setText("Scores:");
-            layout.addView(titleText);
+            //layout.addView(titleText);
 
             String[] names = intent.getStringArrayExtra(NewGameActivity.EXTRA_PLAYER_NAMES);
 
-            playerScore = new LinearLayout[numPlayers];
+            playerScore = new PlayerScore[numPlayers];
             for (int i = 0; i < numPlayers; ++i) {
-                playerScore[i] = new LinearLayout(this);
-                playerScore[i].setLayoutParams(layoutParams);
-                playerScore[i].setHorizontalGravity(LinearLayout.HORIZONTAL);
-                layout.addView(playerScore[i]);
-
-                TextView nameText = new TextView(this);
-                nameText.setLayoutParams(layoutParams);
-                SpannableString n = new SpannableString(names[i]);
-                n.setSpan(new StyleSpan(Typeface.BOLD), 0, n.length(), 0);
-                nameText.setText(n);
-                playerScore[i].addView(nameText);
-
-                for (int j = 0; i < 10; ++j) {
-
-                }
+                playerScore[i] = new PlayerScore(this, nameLayout, scoreLayout, names[i], i, numPlayers);
             }
+        }
+    }
 
-
+    public void newScoreRowForAllPlayers() {
+        for (PlayerScore p : playerScore) {
+            p.addNewScoreRow();
         }
     }
 

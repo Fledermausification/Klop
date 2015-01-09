@@ -17,7 +17,7 @@ import android.widget.Spinner;
 
 
 public class NewGameActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
-    public final static int    MAX_PLAYERS           = 10;
+    public final static int    MAX_PLAYERS           = 12;
     public final static int    PLAYER_NAME_ID_OFFSET = 6666666;
     public final static String EXTRA_PLAYER_NAMES    = "com.fledermaus.klop.PLAYER_NAMES_MESSAGE";
     public final static String EXTRA_PLAYER_NUMBER   = "com.fledermaus.klop.PLAYER_NUMBER_MESSAGE";
