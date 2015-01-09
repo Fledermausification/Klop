@@ -17,7 +17,7 @@ import android.widget.Spinner;
 
 
 public class NewGameActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
-    public final static int    MAX_PLAYERS           = 12;
+    public final static int    MAX_PLAYERS           = 25;
     public final static int    PLAYER_NAME_ID_OFFSET = 6666666;
     public final static String EXTRA_PLAYER_NAMES    = "com.fledermaus.klop.PLAYER_NAMES_MESSAGE";
     public final static String EXTRA_PLAYER_NUMBER   = "com.fledermaus.klop.PLAYER_NUMBER_MESSAGE";
@@ -30,10 +30,16 @@ public class NewGameActivity extends ActionBarActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
 
+        String[] playerNumbers = new String[MAX_PLAYERS - 1];
+        for (int i = 0; i < MAX_PLAYERS - 1; ++i) {
+            playerNumbers[i] = Integer.toString(i + 2);
+        }
+
         Spinner spinner = (Spinner) findViewById(R.id.number_of_players_spinner);
         //Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.number_of_players_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, playerNumbers);
+        //ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        //        R.array.number_of_players_array, android.R.layout.simple_spinner_item);
         //Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Apply the adapter to the spinner
@@ -44,7 +50,7 @@ public class NewGameActivity extends ActionBarActivity implements AdapterView.On
         //Setup the inputs for player names
         LinearLayout              layout       = (LinearLayout) findViewById(R.id.player_names_input);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        InputFilter[]             inputFilters = {new InputFilter.LengthFilter(8)};
+        InputFilter[]             inputFilters = {new InputFilter.LengthFilter(9)};
 
         playerNames = new EditText[MAX_PLAYERS];
         for (int i = 0; i < MAX_PLAYERS; ++i) {
