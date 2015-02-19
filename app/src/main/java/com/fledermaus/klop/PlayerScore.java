@@ -184,6 +184,8 @@ public class PlayerScore {
                         e.setText("X");
                         e.setTextColor(Color.MAGENTA);
                     }
+                    else
+                        missCount = 0;
                 }
             }
             catch (NumberFormatException ex) {}
